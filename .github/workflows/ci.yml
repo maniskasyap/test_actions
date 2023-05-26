@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: leanowl/test_gh_actions_v1
+          tags: |
+            type=raw,value={{date 'YYYYMMDD'}}
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:${{ steps.meta.outputs.tags }}
+      - name: Publish the Docker image
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: leanowl/test_gh_actions_v1
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: 'latest,${{ steps.meta.outputs.tags }}'
