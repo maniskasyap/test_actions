@@ -24,6 +24,6 @@ jobs:
       - name: Publish the Docker image
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
+          name: leanowl/test_gh_actions_v1
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: 'latest,${{ steps.meta.outputs.tags }}'
