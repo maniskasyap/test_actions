@@ -20,7 +20,7 @@ jobs:
           tags: |
             type=raw,value=latest-{{branch}}-{{sha}}
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag leanowl/test_gh_actions_v1:${{ steps.meta.outputs.tags }}
+        run: docker build . --file Dockerfile --tag ${{ steps.meta.outputs.tags }}
       - name: Publish the Docker image
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
