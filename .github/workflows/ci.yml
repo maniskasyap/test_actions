@@ -18,7 +18,7 @@ jobs:
         with:
           images: leanowl/test_gh_actions_v1
           tags: |
-            type=raw,value={{date 'YYYYMMDD'}}
+            type=semver,pattern={{version}}
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag leanowl/test_gh_actions_v1:${{ steps.meta.outputs.tags }}
       - name: Publish the Docker image
