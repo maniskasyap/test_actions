@@ -1,4 +1,4 @@
 # test_actions
 
-> **Important**
+> **Note**
 > This is a warning
